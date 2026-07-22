@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: skew-api
+    env: node
+    plan: free
+    rootDir: .
+    buildCommand: npm install
+    startCommand: node src/index.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ENABLE_CRON
+        value: "true"
+      - key: JWT_EXPIRES_IN
+        value: "7d"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: HF_API_KEY
+        sync: false
+      - key: SCRAPE_KEY
+        sync: false
