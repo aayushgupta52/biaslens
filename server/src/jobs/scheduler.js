@@ -65,10 +65,11 @@ export function startKeepAlive() {
   setInterval(async () => {
     try {
       await fetch(`${renderUrl}/api/health`);
+      console.log('💓 keep-alive ping ok');
     } catch (e) {
       console.warn('⚠️  keep-alive ping failed:', e.message);
     }
-  }, 10 * 60 * 1000);
+  }, 8 * 60 * 1000); // every 8 min — under Render's 15-min sleep threshold
 
   console.log(`💓 Keep-alive pinger active → ${renderUrl}/api/health`);
 }
