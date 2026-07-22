@@ -13,6 +13,14 @@ import { startScheduler, startKeepAlive } from './jobs/scheduler.js';
 
 dotenv.config();
 
+// Prevent a single unhandled error from crashing the whole process
+process.on('uncaughtException', (err) => {
+  console.error('✗ Uncaught exception (server kept alive):', err.message);
+});
+process.on('unhandledRejection', (reason) => {
+  console.error('✗ Unhandled rejection (server kept alive):', reason);
+});
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
